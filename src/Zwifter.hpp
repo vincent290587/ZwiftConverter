@@ -34,7 +34,7 @@ public:
 		start += "\t<sportType>bike</sportType>\r\n";
 		start += "\t<tags>\r\n";
 		start += "\t</tags>\r\n";
-		start += "\t<workout>\r\n";
+		start += "\t<workout>";
 
 		_series.push_back(start);
 	}

@@ -78,12 +78,14 @@ void parseAndConvert(Zwifter &zwifter_, std::vector<std::string> input, std::vec
 	return;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+
+	assert(argc == 2);
 
 	std::vector<std::string> vecOfStr;
 	std::vector<std::string> output;
 
-	const char * fname = "Aspire.txt";
+	const char * fname = argv[1];
 
 	// Get the contents of file in a vector
 	bool result = getFileContent(fname, vecOfStr);
