@@ -90,11 +90,16 @@ int main(int argc, char *argv[]) {
 	// Get the contents of file in a vector
 	bool result = getFileContent(fname, vecOfStr);
 
-	Zwifter myZwifter(fname);
+	if (result) {
+		Zwifter myZwifter(fname);
 
-	parseAndConvert(myZwifter, vecOfStr, output);
+		parseAndConvert(myZwifter, vecOfStr, output);
 
-	myZwifter.print();
+		myZwifter.print();
+	} else {
+
+		return -1;
+	}
 
 	return 0;
 }
