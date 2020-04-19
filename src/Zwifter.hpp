@@ -25,16 +25,16 @@ class Zwifter {
 public:
 	Zwifter(const char * const name) {
 
-		std::string start = "<workout_file>\r\n";
-		start += "\t<author>Vincent Golle</author>\r\n";
-		start += "\t<name>";
+		std::string start = "<workout_file>\n";
+		start += "    <author>Vincent Golle</author>\n";
+		start += "    <name>";
 		start += name;
-		start += "</name>\r\n";
-		start += "\t<description></description>\r\n";
-		start += "\t<sportType>bike</sportType>\r\n";
-		start += "\t<tags>\r\n";
-		start += "\t</tags>\r\n";
-		start += "\t<workout>";
+		start += "</name>\n";
+		start += "    <description></description>\n";
+		start += "    <sportType>bike</sportType>\n";
+		start += "    <tags>\n";
+		start += "    </tags>\n";
+		start += "    <workout>";
 
 		_series.push_back(start);
 	}
@@ -56,13 +56,13 @@ public:
 
 			if (descr.rpm) {
 
-				snprintf(buff, sizeof(buff), "\t\t <SteadyState Duration=""%d"" Power=""%d.%02d"" Cadence=""%d""/>",
+				snprintf(buff, sizeof(buff), "         <SteadyState Duration=""%d"" Power=""%d.%02d"" Cadence=""%d""/>",
 						descr.sec,
 						(int)(descr.ftp / 100), descr.ftp % 100,
 						descr.rpm);
 			} else {
 
-				snprintf(buff, sizeof(buff), "\t\t <SteadyState Duration=""%d"" Power=""%d.%02d""/>",
+				snprintf(buff, sizeof(buff), "         <SteadyState Duration=""%d"" Power=""%d.%02d""/>",
 						descr.sec,
 						(int)(descr.ftp / 100), descr.ftp % 100);
 			}
@@ -93,7 +93,7 @@ public:
 		if (descr1.rpm && descr2.rpm) {
 
 			snprintf(buff, sizeof(buff),
-					"\t\t <IntervalsT Repeat=""%d"" OnDuration=""%d"" OffDuration=""%d"" OnPower=""%d.%02d"" OffPower=""%d.%02d"" Cadence=""%d"" CadenceResting=""%d""/>",
+					"         <IntervalsT Repeat=""%d"" OnDuration=""%d"" OffDuration=""%d"" OnPower=""%d.%02d"" OffPower=""%d.%02d"" Cadence=""%d"" CadenceResting=""%d""/>",
 					nb_reps,
 					descr1.sec,
 					descr2.sec,
@@ -104,7 +104,7 @@ public:
 		} else {
 
 			snprintf(buff, sizeof(buff),
-					"\t\t <IntervalsT Repeat=""%d"" OnDuration=""%d"" OffDuration=""%d"" OnPower=""%d.%02d"" OffPower=""%d.%02d""/>",
+					"         <IntervalsT Repeat=""%d"" OnDuration=""%d"" OffDuration=""%d"" OnPower=""%d.%02d"" OffPower=""%d.%02d""/>",
 					nb_reps,
 					descr1.sec,
 					descr2.sec,
@@ -120,8 +120,8 @@ public:
 
 	void finish() {
 
-		std::string start = "\t</workout>\r\n";
-		start += "</workout_file>\r\n";
+		std::string start = "    </workout>\n";
+		start += "</workout_file>\n";
 
 		_series.push_back(start);
 	}
@@ -146,7 +146,7 @@ private:
 		sec = min * 60;
 
 		char buff[200];
-		snprintf(buff, sizeof(buff), "\t\t<Ramp Duration=""%d"" PowerLow=""%d.%02d"" PowerHigh=""%d.%02d""/>",
+		snprintf(buff, sizeof(buff), "        <Ramp Duration=""%d"" PowerLow=""%d.%02d"" PowerHigh=""%d.%02d""/>",
 				sec,
 				(int)(ftp1 / 100), ftp1 % 100,
 				(int)(ftp2 / 100), ftp2 % 100);
