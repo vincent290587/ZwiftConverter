@@ -1,7 +1,7 @@
 /*
  * Zwifter.hpp
  *
- *  Created on: 5 déc. 2019
+ *  Created on: 5 dÃ©c. 2019
  *      Author: vgol
  */
 
@@ -54,15 +54,28 @@ public:
 
 			char buff[200];
 
-			if (descr.rpm) {
+			if (descr.ftp < 1 && descr.rpm) {
 
-				snprintf(buff, sizeof(buff), "         <SteadyState Duration=""%d"" Power=""%d.%02d"" Cadence=""%d""/>",
+				// freeride with cadence
+				snprintf(buff, sizeof(buff), "         <FreeRide Duration=\"%d\" Cadence=\"%d\" FlatRoad=\"1\"/>",
+						descr.sec,
+						descr.rpm);
+						
+			} else if (descr.ftp < 1) {
+
+				// freeride with no cadence
+				snprintf(buff, sizeof(buff), "         <FreeRide Duration=\"%d\" FlatRoad=\"1\"/>",
+						descr.sec);
+						
+			} else if (descr.rpm) {
+
+				snprintf(buff, sizeof(buff), "         <SteadyState Duration=\"%d\" Power=\"%d.%02d\" Cadence=\"%d\"/>",
 						descr.sec,
 						(int)(descr.ftp / 100), descr.ftp % 100,
 						descr.rpm);
 			} else {
 
-				snprintf(buff, sizeof(buff), "         <SteadyState Duration=""%d"" Power=""%d.%02d""/>",
+				snprintf(buff, sizeof(buff), "         <SteadyState Duration=\"%d\" Power=\"%d.%02d\"/>",
 						descr.sec,
 						(int)(descr.ftp / 100), descr.ftp % 100);
 			}
@@ -93,7 +106,7 @@ public:
 		if (descr1.rpm && descr2.rpm) {
 
 			snprintf(buff, sizeof(buff),
-					"         <IntervalsT Repeat=""%d"" OnDuration=""%d"" OffDuration=""%d"" OnPower=""%d.%02d"" OffPower=""%d.%02d"" Cadence=""%d"" CadenceResting=""%d""/>",
+					"         <IntervalsT Repeat=\"%d\" OnDuration=\"%d\" OffDuration=\"%d\" OnPower=\"%d.%02d\" OffPower=\"%d.%02d\" Cadence=\"%d\" CadenceResting=\"%d\"/>",
 					nb_reps,
 					descr1.sec,
 					descr2.sec,
@@ -104,7 +117,7 @@ public:
 		} else {
 
 			snprintf(buff, sizeof(buff),
-					"         <IntervalsT Repeat=""%d"" OnDuration=""%d"" OffDuration=""%d"" OnPower=""%d.%02d"" OffPower=""%d.%02d""/>",
+					"         <IntervalsT Repeat=\"%d\" OnDuration=\"%d\" OffDuration=\"%d\" OnPower=\"%d.%02d\" OffPower=\"%d.%02d\"/>",
 					nb_reps,
 					descr1.sec,
 					descr2.sec,
@@ -137,19 +150,38 @@ private:
 	void parseTriangle(std::string line1) {
 
 		std::cout << line1 << std::endl;
-
-		// ramp
-		int sec, min, ftp1, ftp2;
-		int res = sscanf(line1.c_str(), "%dmin from %d to %d\% FTP", &min, &ftp1, &ftp2);
-		assert(res == 3);
-
-		sec = min * 60;
-
 		char buff[200];
-		snprintf(buff, sizeof(buff), "        <Ramp Duration=""%d"" PowerLow=""%d.%02d"" PowerHigh=""%d.%02d""/>",
-				sec,
-				(int)(ftp1 / 100), ftp1 % 100,
-				(int)(ftp2 / 100), ftp2 % 100);
+
+		if (line1.find("rpm") != std::string::npos) {
+
+			// ramp with cadence
+			int sec, cad, min, ftp1, ftp2;
+			int res = sscanf(line1.c_str(), "%dmin @ %drpm, from %d to %d\% FTP", &min, &cad, &ftp1, &ftp2);
+			assert(res == 4);
+
+			sec = min * 60;
+
+			snprintf(buff, sizeof(buff), "        <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\" Cadence=\"%d\"/>",
+					sec,
+					(int)(ftp1 / 100), ftp1 % 100,
+					(int)(ftp2 / 100), ftp2 % 100,
+					cad);
+
+		} else {
+
+			// ramp
+			int sec, min, ftp1, ftp2;
+			int res = sscanf(line1.c_str(), "%dmin from %d to %d\% FTP", &min, &ftp1, &ftp2);
+			assert(res == 3);
+
+			sec = min * 60;
+
+			snprintf(buff, sizeof(buff), "        <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\"/>",
+					sec,
+					(int)(ftp1 / 100), ftp1 % 100,
+					(int)(ftp2 / 100), ftp2 % 100);
+
+		}
 
 		std::string line = buff;
 
@@ -200,25 +232,46 @@ private:
 
 		parseTimeRectangle(line, sec);
 
-		std::string sub = line.substr(line.find('@'), line.length());
-		std::cout << sub << std::endl;
+		if (line.find("free") == std::string::npos) {
 
-		// rpm ?
-		if (sub.find("rpm") != std::string::npos) {
+			// rpm ?
+			if (line.find("rpm") != std::string::npos) {
 
-			int res = sscanf(sub.c_str(), "@ %drpm, %d\% FTP", &rpm, &ftp);
-			assert(res == 2);
+				std::string sub = line.substr(line.find('@'), line.length());
+				std::cout << sub << std::endl;
+
+				int res = sscanf(sub.c_str(), "@ %drpm, %d\% FTP", &rpm, &ftp);
+				assert(res == 2);
+
+			} else {
+
+				int res = sscanf(line.c_str(), "@ %d\% FTP", &ftp);
+				assert(res == 1);
+
+			}
+
+			descr.sec = sec;
+			descr.ftp = ftp;
+			descr.rpm = rpm;
 
 		} else {
 
-			int res = sscanf(sub.c_str(), "@ %d\% FTP", &ftp);
-			assert(res == 1);
+			// rpm ?
+			if (line.find("rpm") != std::string::npos) {
+
+				std::string sub = line.substr(line.find('@'), line.length());
+				std::cout << sub << std::endl;
+
+				int res = sscanf(sub.c_str(), "@ %drpm", &rpm);
+				assert(res == 1);
+
+			}
+
+			descr.sec = sec;
+			descr.ftp = -1;
+			descr.rpm = rpm;
 
 		}
-
-		descr.sec = sec;
-		descr.ftp = ftp;
-		descr.rpm = rpm;
 
 	}
 };

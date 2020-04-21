@@ -1,7 +1,7 @@
 /*
  * Zwifter.cpp
  *
- *  Created on: 5 déc. 2019
+ *  Created on: 5 dÃ©c. 2019
  *      Author: vgol
  */
 
@@ -49,26 +49,35 @@ void parseAndConvert(Zwifter &zwifter_, std::vector<std::string> input, std::vec
 
 	for (auto raw_line : input) {
 
-		line = raw_line.substr(0, raw_line.find("FTP") + 3);
-
-		if (is_repet) {
-			is_repet = false;
-
-			// handle second part of repetition
-			zwifter_.addRepetition(repet1, line);
-		}
-
-		if (line.at(1) == 'x' || line.at(2) == 'x') {
-			// we have a repetition
-			is_repet = true;
-			repet1 = line;
-
-			continue;
-		}
-		else {
+		if (raw_line.find("FTP") == std::string::npos) {
 
 			// add single line
-			zwifter_.addSingle(line);
+			zwifter_.addSingle(raw_line);
+
+		} else {
+
+			line = raw_line.substr(0, raw_line.find("FTP") + 3);
+
+			if (is_repet) {
+				is_repet = false;
+
+				// handle second part of repetition
+				zwifter_.addRepetition(repet1, line);
+			}
+
+			if (line.at(1) == 'x' || line.at(2) == 'x') {
+				// we have a repetition
+				is_repet = true;
+				repet1 = line;
+
+				continue;
+			}
+			else {
+
+				// add single line
+				zwifter_.addSingle(line);
+			}
+
 		}
 
 	}
