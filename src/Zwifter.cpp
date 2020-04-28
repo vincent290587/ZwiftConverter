@@ -63,6 +63,8 @@ void parseAndConvert(Zwifter &zwifter_, std::vector<std::string> input, std::vec
 
 				// handle second part of repetition
 				zwifter_.addRepetition(repet1, line);
+
+				continue;
 			}
 
 			if (line.at(1) == 'x' || line.at(2) == 'x') {

@@ -21,6 +21,17 @@ typedef struct {
 } sSingleRectangle;
 
 
+static inline void _check_char_pres(std::string line, const char * const c) {
+
+	if (line.find("@") == std::string::npos) {
+
+		std::cout << "Line is missing char: line=" << std::endl;
+		std::cout << line << std::endl;
+		assert(0);
+	}
+}
+
+
 class Zwifter {
 public:
 	Zwifter(const char * const name) {
@@ -161,7 +172,7 @@ private:
 
 			sec = min * 60;
 
-			snprintf(buff, sizeof(buff), "        <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\" Cadence=\"%d\"/>",
+			snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\" Cadence=\"%d\"/>",
 					sec,
 					(int)(ftp1 / 100), ftp1 % 100,
 					(int)(ftp2 / 100), ftp2 % 100,
@@ -176,7 +187,7 @@ private:
 
 			sec = min * 60;
 
-			snprintf(buff, sizeof(buff), "        <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\"/>",
+			snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\"/>",
 					sec,
 					(int)(ftp1 / 100), ftp1 % 100,
 					(int)(ftp2 / 100), ftp2 % 100);
@@ -191,7 +202,14 @@ private:
 	void parseTimeRectangle(std::string line, int &sec) {
 
 		char buffer[50];
-		std::string sub = line.substr(0, line.find('@'));
+		std::string sub = "";
+
+		if (line.find("@") != std::string::npos) {
+			sub = line.substr(0, line.find('@'));
+		} else if (line.find("free") != std::string::npos) {
+			sub = line.substr(0, line.find('f'));
+		}
+
 		std::cout << sub << std::endl;
 
 		sec = 0;
@@ -237,6 +255,8 @@ private:
 			// rpm ?
 			if (line.find("rpm") != std::string::npos) {
 
+				_check_char_pres(line, "@");
+
 				std::string sub = line.substr(line.find('@'), line.length());
 				std::cout << sub << std::endl;
 
@@ -245,7 +265,11 @@ private:
 
 			} else {
 
-				int res = sscanf(line.c_str(), "@ %d\% FTP", &ftp);
+				if (line.find("@") != std::string::npos) {
+					line = line.substr(line.find('@')+1, line.length());
+				}
+
+				int res = sscanf(line.c_str(), " %d\% FTP", &ftp);
 				assert(res == 1);
 
 			}
@@ -258,6 +282,8 @@ private:
 
 			// rpm ?
 			if (line.find("rpm") != std::string::npos) {
+
+				_check_char_pres(line, "@");
 
 				std::string sub = line.substr(line.find('@'), line.length());
 				std::cout << sub << std::endl;
