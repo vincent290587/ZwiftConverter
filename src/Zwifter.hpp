@@ -166,11 +166,25 @@ private:
 		if (line1.find("rpm") != std::string::npos) {
 
 			// ramp with cadence
-			int sec, cad, min, ftp1, ftp2;
-			int res = sscanf(line1.c_str(), "%dmin @ %drpm, from %d to %d\% FTP", &min, &cad, &ftp1, &ftp2);
-			assert(res == 4);
+			int sec=0, cad, min=0, ftp1, ftp2;
+			int res;
+			if (line1.find("min") != std::string::npos && line1.find("sec") != std::string::npos) {
 
-			sec = min * 60;
+				res = sscanf(line1.c_str(), "%dmin %dsec from %d to %d\% FTP", &min, &sec, &cad, &ftp1, &ftp2);
+				assert(res == 5);
+			}
+			else if (line1.find("min") != std::string::npos) {
+
+				res = sscanf(line1.c_str(), "%dmin @ %drpm, from %d to %d\% FTP", &min, &cad, &ftp1, &ftp2);
+				assert(res == 4);
+
+			}
+			else {
+				res = sscanf(line1.c_str(), "%sec @ %drpm, from %d to %d\% FTP", &sec, &cad, &ftp1, &ftp2);
+				assert(res == 4);
+			}
+
+			sec += min * 60;
 
 			snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\" Cadence=\"%d\"/>",
 					sec,
@@ -181,11 +195,22 @@ private:
 		} else {
 
 			// ramp
-			int sec, min, ftp1, ftp2;
-			int res = sscanf(line1.c_str(), "%dmin from %d to %d\% FTP", &min, &ftp1, &ftp2);
-			assert(res == 3);
+			int sec=0, min=0, ftp1, ftp2;
+			int res;
+			if (line1.find("min") != std::string::npos && line1.find("sec") != std::string::npos) {
+				res = sscanf(line1.c_str(), "%dmin %dsec from %d to %d\% FTP", &min, &sec, &ftp1, &ftp2);
+				assert(res == 4);
+			}
+			else if (line1.find("min") != std::string::npos) {
+				res = sscanf(line1.c_str(), "%dmin from %d to %d\% FTP", &min, &ftp1, &ftp2);
+				assert(res == 3);
+			}
+			else {
+				res = sscanf(line1.c_str(), "%dsec from %d to %d\% FTP", &sec, &ftp1, &ftp2);
+				assert(res == 3);
+			}
 
-			sec = min * 60;
+			sec += min * 60;
 
 			snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\"/>",
 					sec,
