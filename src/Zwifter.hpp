@@ -158,6 +158,35 @@ public:
 private:
 	std::vector<std::string> _series;
 
+	void parseTime(std::string sub, int &sec) {
+
+		sec = 0;
+
+		if (sub.find("min") != std::string::npos) {
+
+			// min
+			int min = 0;
+			int res = sscanf(sub.c_str(), "%dmin ", &min);
+			assert(res == 1);
+
+			sec = min * 60;
+
+			sub = sub.substr(sub.find("min") + 4, sub.length());
+			std::cout << sub << std::endl;
+		}
+
+		if (sub.find("sec") != std::string::npos) {
+
+			// sec
+			int _sec = 0;
+			int res = sscanf(sub.c_str(), "%dsec ", &_sec);
+			assert(res == 1);
+
+			sec += _sec;
+		}
+
+	}
+
 	void parseTriangle(std::string line1) {
 
 		std::cout << line1 << std::endl;
@@ -166,11 +195,17 @@ private:
 		if (line1.find("rpm") != std::string::npos) {
 
 			// ramp with cadence
-			int sec, cad, min, ftp1, ftp2;
-			int res = sscanf(line1.c_str(), "%dmin @ %drpm, from %d to %d\% FTP", &min, &cad, &ftp1, &ftp2);
-			assert(res == 4);
+			int sec, cad, ftp1, ftp2;
 
-			sec = min * 60;
+			// parse the time
+			parseTime(line1, sec);
+			// remove time from string
+			if (line1.find("@") != std::string::npos) {
+				line1 = line1.substr(line1.find("@"), line1.length());
+			}
+			// scan the rest
+			int res = sscanf(line1.c_str(), "@ %drpm, from %d to %d\% FTP", &cad, &ftp1, &ftp2);
+			assert(res == 3);
 
 			snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\" Cadence=\"%d\"/>",
 					sec,
@@ -181,11 +216,17 @@ private:
 		} else {
 
 			// ramp
-			int sec, min, ftp1, ftp2;
-			int res = sscanf(line1.c_str(), "%dmin from %d to %d\% FTP", &min, &ftp1, &ftp2);
-			assert(res == 3);
+			int sec, ftp1, ftp2;
 
-			sec = min * 60;
+			// parse the time
+			parseTime(line1, sec);
+			// remove time from string
+			if (line1.find("from") != std::string::npos) {
+				line1 = line1.substr(line1.find("from"), line1.length());
+			}
+
+			int res = sscanf(line1.c_str(), "from %d to %d\% FTP", &ftp1, &ftp2);
+			assert(res == 2);
 
 			snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\"/>",
 					sec,
@@ -212,33 +253,8 @@ private:
 
 		std::cout << sub << std::endl;
 
-		sec = 0;
+		parseTime(sub, sec);
 
-		if (sub.find("min") != std::string::npos) {
-
-			// min
-			int min = 0;
-			int res = sscanf(sub.c_str(), "%dmin ", &min);
-			assert(res == 1);
-
-			sec = min * 60;
-
-		}
-
-		if (sub.find("sec") != std::string::npos) {
-
-			if (sub.find("min") != std::string::npos) {
-				sub = sub.substr(sub.find("min") + 4, sub.length());
-				std::cout << sub << std::endl;
-			}
-
-			// sec
-			int _sec = 0;
-			int res = sscanf(sub.c_str(), "%dsec ", &_sec);
-			assert(res == 1);
-
-			sec += _sec;
-		}
 	}
 
 	void parseRectangle(std::string line, sSingleRectangle &descr) {
