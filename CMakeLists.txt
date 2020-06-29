@@ -2,6 +2,8 @@ cmake_minimum_required (VERSION 3.5.1)
 
 project (Zwifter LANGUAGES CXX)
 
+set(CMAKE_COLOR_MAKEFILE                        OFF)
+
 if(CMAKE_HOST_UNIX)
 add_compile_options(-std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti -fpermissive -rdynamic)
 else()
