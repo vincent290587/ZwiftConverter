@@ -14,6 +14,10 @@
 #include <assert.h>
 #include <vector>
 
+
+#define BYPASS_RAMP_REPLACEMENT 0
+
+
 typedef struct {
 	int sec;
 	int ftp;
@@ -25,8 +29,8 @@ static inline void _check_char_pres(std::string line, const char * const c) {
 
 	if (line.find("@") == std::string::npos) {
 
-		std::cout << "Line is missing char: line=" << std::endl;
-		std::cout << line << std::endl;
+		std::cerr << "Line is missing char: line=" << std::endl;
+		std::cerr << line << std::endl;
 		assert(0);
 	}
 }
@@ -172,7 +176,7 @@ private:
 			sec = min * 60;
 
 			sub = sub.substr(sub.find("min") + 4, sub.length());
-			std::cout << sub << std::endl;
+			//std::cout << sub << std::endl;
 		}
 
 		if (sub.find("sec") != std::string::npos) {
@@ -189,7 +193,7 @@ private:
 
 	void parseTriangle(std::string line1) {
 
-		std::cout << line1 << std::endl;
+		//std::cout << line1 << std::endl;
 		char buff[200];
 
 		if (line1.find("rpm") != std::string::npos) {
@@ -207,11 +211,34 @@ private:
 			int res = sscanf(line1.c_str(), "@ %drpm, from %d to %d\% FTP", &cad, &ftp1, &ftp2);
 			assert(res == 3);
 
-			snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\" Cadence=\"%d\"/>",
-					sec,
-					(int)(ftp1 / 100), ftp1 % 100,
-					(int)(ftp2 / 100), ftp2 % 100,
-					cad);
+			if (sec > 30 || BYPASS_RAMP_REPLACEMENT) {
+				snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\" Cadence=\"%d\"/>",
+						sec,
+						(int)(ftp1 / 100), ftp1 % 100,
+						(int)(ftp2 / 100), ftp2 % 100,
+						cad);
+			} else {
+
+				int nb_inter = sec / 10;
+				int dftp = (ftp2 - ftp1) / nb_inter;
+				int ftp = ftp1 + dftp / 2;
+				do {
+
+					snprintf(buff, sizeof(buff), "         <SteadyState Duration=\"%d\" Power=\"%d.%02d\" Cadence=\"%d\"/>",
+							10,
+							(int)(ftp / 100), ftp % 100,
+							cad);
+
+					ftp += dftp;
+
+					std::string line = buff;
+
+					_series.push_back(line);
+
+				} while (--nb_inter);
+
+				return;
+			}
 
 		} else {
 
@@ -228,10 +255,32 @@ private:
 			int res = sscanf(line1.c_str(), "from %d to %d\% FTP", &ftp1, &ftp2);
 			assert(res == 2);
 
-			snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\"/>",
-					sec,
-					(int)(ftp1 / 100), ftp1 % 100,
-					(int)(ftp2 / 100), ftp2 % 100);
+			if (sec > 30 || BYPASS_RAMP_REPLACEMENT) {
+				snprintf(buff, sizeof(buff), "         <Ramp Duration=\"%d\" PowerLow=\"%d.%02d\" PowerHigh=\"%d.%02d\"/>",
+						sec,
+						(int)(ftp1 / 100), ftp1 % 100,
+						(int)(ftp2 / 100), ftp2 % 100);
+			} else {
+
+				int nb_inter = sec / 10;
+				int dftp = (ftp2 - ftp1) / nb_inter;
+				int ftp = ftp1 + dftp / 2;
+				do {
+
+					snprintf(buff, sizeof(buff), "         <SteadyState Duration=\"%d\" Power=\"%d.%02d\"/>",
+							10,
+							(int)(ftp / 100), ftp % 100);
+
+					ftp += dftp;
+
+					std::string line = buff;
+
+					_series.push_back(line);
+
+				} while (--nb_inter);
+
+				return;
+			}
 
 		}
 
@@ -251,7 +300,7 @@ private:
 			sub = line.substr(0, line.find('f'));
 		}
 
-		std::cout << sub << std::endl;
+		//std::cout << sub << std::endl;
 
 		parseTime(sub, sec);
 
@@ -262,7 +311,7 @@ private:
 		int sec, ftp;
 		int rpm = 0;
 
-		std::cout << line << std::endl;
+		//std::cout << line << std::endl;
 
 		parseTimeRectangle(line, sec);
 
@@ -274,7 +323,7 @@ private:
 				_check_char_pres(line, "@");
 
 				std::string sub = line.substr(line.find('@'), line.length());
-				std::cout << sub << std::endl;
+				//std::cout << sub << std::endl;
 
 				int res = sscanf(sub.c_str(), "@ %drpm, %d\% FTP", &rpm, &ftp);
 				assert(res == 2);
@@ -302,7 +351,7 @@ private:
 				_check_char_pres(line, "@");
 
 				std::string sub = line.substr(line.find('@'), line.length());
-				std::cout << sub << std::endl;
+				//std::cout << sub << std::endl;
 
 				int res = sscanf(sub.c_str(), "@ %drpm", &rpm);
 				assert(res == 1);
