@@ -14,13 +14,19 @@
          <SteadyState Duration="30" Power="1.05" Cadence="115"/>
          <SteadyState Duration="120" Power="0.50" Cadence="85"/>
          <SteadyState Duration="300" Power="0.95" Cadence="95"/>
-         <Ramp Duration="30" PowerLow="1.00" PowerHigh="1.50"/>
+         <SteadyState Duration="10" Power="1.08"/>
+         <SteadyState Duration="10" Power="1.24"/>
+         <SteadyState Duration="10" Power="1.40"/>
          <SteadyState Duration="150" Power="0.50" Cadence="85"/>
          <SteadyState Duration="300" Power="0.95" Cadence="95"/>
-         <Ramp Duration="30" PowerLow="1.00" PowerHigh="1.50"/>
+         <SteadyState Duration="10" Power="1.08"/>
+         <SteadyState Duration="10" Power="1.24"/>
+         <SteadyState Duration="10" Power="1.40"/>
          <SteadyState Duration="150" Power="0.50" Cadence="85"/>
          <SteadyState Duration="300" Power="0.95" Cadence="95"/>
-         <Ramp Duration="30" PowerLow="1.00" PowerHigh="1.50"/>
+         <SteadyState Duration="10" Power="1.08"/>
+         <SteadyState Duration="10" Power="1.24"/>
+         <SteadyState Duration="10" Power="1.40"/>
          <SteadyState Duration="180" Power="0.50" Cadence="85"/>
          <IntervalsT Repeat="5" OnDuration="30" OffDuration="30" OnPower="1.30" OffPower="0.70" Cadence="100" CadenceResting="90"/>
          <SteadyState Duration="180" Power="0.50" Cadence="85"/>

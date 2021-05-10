@@ -23,23 +23,33 @@
          <SteadyState Duration="60" Power="0.50" Cadence="85"/>
          <SteadyState Duration="15" Power="1.50" Cadence="110"/>
          <SteadyState Duration="120" Power="0.50" Cadence="85"/>
-         <Ramp Duration="30" PowerLow="0.65" PowerHigh="0.88"/>
+         <SteadyState Duration="10" Power="0.68"/>
+         <SteadyState Duration="10" Power="0.75"/>
+         <SteadyState Duration="10" Power="0.82"/>
          <SteadyState Duration="240" Power="0.88" Cadence="95"/>
          <SteadyState Duration="60" Power="1.05" Cadence="105"/>
          <SteadyState Duration="15" Power="0.65" Cadence="85"/>
-         <Ramp Duration="30" PowerLow="0.65" PowerHigh="0.92"/>
+         <SteadyState Duration="10" Power="0.69"/>
+         <SteadyState Duration="10" Power="0.78"/>
+         <SteadyState Duration="10" Power="0.87"/>
          <SteadyState Duration="240" Power="0.92" Cadence="95"/>
          <SteadyState Duration="60" Power="1.05" Cadence="105"/>
          <SteadyState Duration="30" Power="0.65" Cadence="85"/>
-         <Ramp Duration="30" PowerLow="0.65" PowerHigh="0.96"/>
+         <SteadyState Duration="10" Power="0.70"/>
+         <SteadyState Duration="10" Power="0.80"/>
+         <SteadyState Duration="10" Power="0.90"/>
          <SteadyState Duration="240" Power="0.96" Cadence="95"/>
          <SteadyState Duration="60" Power="1.06" Cadence="105"/>
          <SteadyState Duration="60" Power="0.65" Cadence="85"/>
-         <Ramp Duration="30" PowerLow="0.65" PowerHigh="1.00"/>
+         <SteadyState Duration="10" Power="0.70"/>
+         <SteadyState Duration="10" Power="0.81"/>
+         <SteadyState Duration="10" Power="0.92"/>
          <SteadyState Duration="240" Power="1.00" Cadence="95"/>
          <SteadyState Duration="60" Power="1.05" Cadence="105"/>
          <SteadyState Duration="120" Power="0.65" Cadence="85"/>
-         <Ramp Duration="30" PowerLow="0.65" PowerHigh="1.04"/>
+         <SteadyState Duration="10" Power="0.71"/>
+         <SteadyState Duration="10" Power="0.84"/>
+         <SteadyState Duration="10" Power="0.97"/>
          <SteadyState Duration="240" Power="1.04" Cadence="95"/>
          <Ramp Duration="60" PowerLow="1.04" PowerHigh="1.20" Cadence="58"/>
          <Ramp Duration="345" PowerLow="0.75" PowerHigh="0.25"/>

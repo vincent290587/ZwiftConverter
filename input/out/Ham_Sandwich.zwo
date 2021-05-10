@@ -14,9 +14,13 @@
          <SteadyState Duration="30" Power="0.80" Cadence="85"/>
          <SteadyState Duration="30" Power="1.10" Cadence="110"/>
          <SteadyState Duration="120" Power="0.50" Cadence="85"/>
-         <Ramp Duration="30" PowerLow="0.50" PowerHigh="0.88"/>
+         <SteadyState Duration="10" Power="0.56"/>
+         <SteadyState Duration="10" Power="0.68"/>
+         <SteadyState Duration="10" Power="0.80"/>
          <IntervalsT Repeat="4" OnDuration="120" OffDuration="30" OnPower="0.88" OffPower="1.10" Cadence="90" CadenceResting="110"/>
-         <Ramp Duration="30" PowerLow="0.88" PowerHigh="0.50"/>
+         <SteadyState Duration="10" Power="0.82"/>
+         <SteadyState Duration="10" Power="0.70"/>
+         <SteadyState Duration="10" Power="0.58"/>
          <SteadyState Duration="150" Power="0.50" Cadence="85"/>
          <IntervalsT Repeat="5" OnDuration="30" OffDuration="30" OnPower="1.30" OffPower="0.50" Cadence="110" CadenceResting="85"/>
          <SteadyState Duration="120" Power="0.50" Cadence="85"/>
@@ -24,7 +28,9 @@
          <SteadyState Duration="120" Power="0.50" Cadence="85"/>
          <IntervalsT Repeat="5" OnDuration="30" OffDuration="30" OnPower="1.30" OffPower="0.50" Cadence="110" CadenceResting="85"/>
          <SteadyState Duration="120" Power="0.50" Cadence="85"/>
-         <Ramp Duration="30" PowerLow="0.50" PowerHigh="0.88"/>
+         <SteadyState Duration="10" Power="0.56"/>
+         <SteadyState Duration="10" Power="0.68"/>
+         <SteadyState Duration="10" Power="0.80"/>
          <IntervalsT Repeat="4" OnDuration="120" OffDuration="30" OnPower="0.88" OffPower="1.10" Cadence="90" CadenceResting="110"/>
          <Ramp Duration="120" PowerLow="0.50" PowerHigh="0.25"/>
     </workout>
