@@ -1,0 +1,30 @@
+<workout_file>
+    <author>Vincent Golle</author>
+    <name>Tenacity</name>
+    <description></description>
+    <sportType>bike</sportType>
+    <tags>
+    </tags>
+    <workout>
+         <Ramp Duration="300" PowerLow="0.25" PowerHigh="0.65"/>
+         <SteadyState Duration="300" Power="0.65" Cadence="95"/>
+         <SteadyState Duration="60" Power="0.75" Cadence="100"/>
+         <SteadyState Duration="60" Power="0.80" Cadence="100"/>
+         <SteadyState Duration="30" Power="0.55" Cadence="85"/>
+         <SteadyState Duration="60" Power="0.85" Cadence="105"/>
+         <SteadyState Duration="60" Power="0.90" Cadence="105"/>
+         <SteadyState Duration="30" Power="0.55" Cadence="85"/>
+         <SteadyState Duration="60" Power="0.95" Cadence="110"/>
+         <SteadyState Duration="60" Power="1.00" Cadence="110"/>
+         <SteadyState Duration="180" Power="0.55" Cadence="85"/>
+         <IntervalsT Repeat="6" OnDuration="300" OffDuration="5" OnPower="0.85" OffPower="2.00" Cadence="90" CadenceResting="110"/>
+         <SteadyState Duration="360" Power="0.55" Cadence="85"/>
+         <IntervalsT Repeat="6" OnDuration="300" OffDuration="5" OnPower="0.85" OffPower="2.00" Cadence="90" CadenceResting="110"/>
+         <SteadyState Duration="360" Power="0.55" Cadence="85"/>
+         <IntervalsT Repeat="4" OnDuration="60" OffDuration="60" OnPower="1.15" OffPower="0.55" Cadence="100" CadenceResting="85"/>
+         <SteadyState Duration="120" Power="0.40" Cadence="85"/>
+         <IntervalsT Repeat="4" OnDuration="60" OffDuration="60" OnPower="1.15" OffPower="0.55" Cadence="100" CadenceResting="85"/>
+         <Ramp Duration="540" PowerLow="0.55" PowerHigh="0.25"/>
+    </workout>
+</workout_file>
+

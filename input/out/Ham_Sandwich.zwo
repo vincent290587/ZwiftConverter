@@ -1,0 +1,32 @@
+<workout_file>
+    <author>Vincent Golle</author>
+    <name>Ham_Sandwich</name>
+    <description></description>
+    <sportType>bike</sportType>
+    <tags>
+    </tags>
+    <workout>
+         <Ramp Duration="600" PowerLow="0.40" PowerHigh="0.75"/>
+         <SteadyState Duration="30" Power="0.80" Cadence="95"/>
+         <SteadyState Duration="30" Power="0.95" Cadence="95"/>
+         <SteadyState Duration="30" Power="0.80" Cadence="85"/>
+         <SteadyState Duration="30" Power="1.05" Cadence="105"/>
+         <SteadyState Duration="30" Power="0.80" Cadence="85"/>
+         <SteadyState Duration="30" Power="1.10" Cadence="110"/>
+         <SteadyState Duration="120" Power="0.50" Cadence="85"/>
+         <Ramp Duration="30" PowerLow="0.50" PowerHigh="0.88"/>
+         <IntervalsT Repeat="4" OnDuration="120" OffDuration="30" OnPower="0.88" OffPower="1.10" Cadence="90" CadenceResting="110"/>
+         <Ramp Duration="30" PowerLow="0.88" PowerHigh="0.50"/>
+         <SteadyState Duration="150" Power="0.50" Cadence="85"/>
+         <IntervalsT Repeat="5" OnDuration="30" OffDuration="30" OnPower="1.30" OffPower="0.50" Cadence="110" CadenceResting="85"/>
+         <SteadyState Duration="120" Power="0.50" Cadence="85"/>
+         <IntervalsT Repeat="5" OnDuration="30" OffDuration="30" OnPower="1.30" OffPower="0.50" Cadence="110" CadenceResting="85"/>
+         <SteadyState Duration="120" Power="0.50" Cadence="85"/>
+         <IntervalsT Repeat="5" OnDuration="30" OffDuration="30" OnPower="1.30" OffPower="0.50" Cadence="110" CadenceResting="85"/>
+         <SteadyState Duration="120" Power="0.50" Cadence="85"/>
+         <Ramp Duration="30" PowerLow="0.50" PowerHigh="0.88"/>
+         <IntervalsT Repeat="4" OnDuration="120" OffDuration="30" OnPower="0.88" OffPower="1.10" Cadence="90" CadenceResting="110"/>
+         <Ramp Duration="120" PowerLow="0.50" PowerHigh="0.25"/>
+    </workout>
+</workout_file>
+

@@ -1,0 +1,32 @@
+<workout_file>
+    <author>Vincent Golle</author>
+    <name>Mosaic</name>
+    <description></description>
+    <sportType>bike</sportType>
+    <tags>
+    </tags>
+    <workout>
+         <Ramp Duration="600" PowerLow="0.40" PowerHigh="0.80"/>
+         <IntervalsT Repeat="1" OnDuration="30" OffDuration="30" OnPower="0.90" OffPower="0.55" Cadence="95" CadenceResting="85"/>
+         <IntervalsT Repeat="1" OnDuration="30" OffDuration="30" OnPower="1.00" OffPower="0.55" Cadence="105" CadenceResting="85"/>
+         <IntervalsT Repeat="1" OnDuration="30" OffDuration="30" OnPower="1.10" OffPower="0.55" Cadence="115" CadenceResting="85"/>
+         <SteadyState Duration="120" Power="0.55" Cadence="85"/>
+         <IntervalsT Repeat="5" OnDuration="180" OffDuration="180" OnPower="1.15" OffPower="0.65" Cadence="100" CadenceResting="85"/>
+         <SteadyState Duration="300" Power="0.55" Cadence="85"/>
+         <IntervalsT Repeat="10" OnDuration="60" OffDuration="60" OnPower="1.00" OffPower="0.75" Cadence="95" CadenceResting="65"/>
+         <SteadyState Duration="300" Power="0.55" Cadence="85"/>
+         <IntervalsT Repeat="1" OnDuration="300" OffDuration="60" OnPower="0.85" OffPower="1.00" Cadence="90" CadenceResting="105"/>
+         <IntervalsT Repeat="1" OnDuration="300" OffDuration="60" OnPower="0.85" OffPower="1.00" Cadence="80" CadenceResting="95"/>
+         <IntervalsT Repeat="1" OnDuration="300" OffDuration="60" OnPower="0.85" OffPower="1.00" Cadence="70" CadenceResting="85"/>
+         <SteadyState Duration="60" Power="0.85" Cadence="85"/>
+         <SteadyState Duration="60" Power="0.85" Cadence="60"/>
+         <SteadyState Duration="60" Power="0.85" Cadence="85"/>
+         <SteadyState Duration="60" Power="0.85" Cadence="60"/>
+         <SteadyState Duration="60" Power="0.85" Cadence="85"/>
+         <SteadyState Duration="60" Power="1.00" Cadence="100"/>
+         <IntervalsT Repeat="1" OnDuration="300" OffDuration="60" OnPower="0.85" OffPower="1.00" Cadence="80" CadenceResting="95"/>
+         <IntervalsT Repeat="1" OnDuration="300" OffDuration="60" OnPower="0.85" OffPower="1.00" Cadence="90" CadenceResting="105"/>
+         <Ramp Duration="240" PowerLow="0.55" PowerHigh="0.25"/>
+    </workout>
+</workout_file>
+

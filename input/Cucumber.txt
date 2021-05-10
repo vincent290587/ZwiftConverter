@@ -1,0 +1,33 @@
+5min from 25 to 60% FTP
+5min @ 90rpm, 60% FTP
+3min @ 100rpm, 75% FTP
+2min @ 85rpm, 55% FTP
+30sec @ 100rpm, 100% FTP
+30sec @ 110rpm, 130% FTP
+15sec @ 115rpm, 150% FTP
+2min @ 85rpm, 55% FTP
+10min @ 90rpm, 90% FTP
+2min @ 85rpm, 67% FTP
+10min @ 75rpm, 90% FTP
+2min @ 85rpm, 67% FTP
+3min 20sec @ 90rpm, 90% FTP
+3min 20sec @ 105rpm, 90% FTP
+3min 20sec @ 90rpm, 90% FTP
+2min @ 85rpm, 67% FTP
+30sec @ 100rpm, 100% FTP
+30sec @ 110rpm, 130% FTP
+15sec @ 115rpm, 150% FTP
+2min @ 85rpm, 55% FTP
+5min @ 90rpm, 95% FTP
+5min @ 90rpm, 85% FTP
+2min @ 85rpm, 67% FTP
+2min 30sec @ 100rpm, 95% FTP
+2min 30sec @ 80rpm, 85% FTP
+2min 30sec @ 100rpm, 95% FTP
+2min 30sec @ 80rpm, 85% FTP
+2min 30sec @ 100rpm, 95% FTP
+2min 30sec @ 80rpm, 85% FTP
+30sec @ 100rpm, 100% FTP
+30sec @ 110rpm, 130% FTP
+15sec @ 115rpm, 150% FTP
+4min 15sec from 60 to 25% FTP

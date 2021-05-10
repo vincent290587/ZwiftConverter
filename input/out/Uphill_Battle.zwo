@@ -1,0 +1,31 @@
+<workout_file>
+    <author>Vincent Golle</author>
+    <name>Uphill_Battle</name>
+    <description></description>
+    <sportType>bike</sportType>
+    <tags>
+    </tags>
+    <workout>
+         <Ramp Duration="600" PowerLow="0.25" PowerHigh="0.75"/>
+         <SteadyState Duration="30" Power="0.80" Cadence="95"/>
+         <SteadyState Duration="60" Power="0.65" Cadence="85"/>
+         <SteadyState Duration="30" Power="0.90" Cadence="105"/>
+         <SteadyState Duration="60" Power="0.65" Cadence="85"/>
+         <SteadyState Duration="30" Power="1.05" Cadence="115"/>
+         <SteadyState Duration="120" Power="0.50" Cadence="85"/>
+         <SteadyState Duration="300" Power="0.95" Cadence="95"/>
+         <Ramp Duration="30" PowerLow="1.00" PowerHigh="1.50"/>
+         <SteadyState Duration="150" Power="0.50" Cadence="85"/>
+         <SteadyState Duration="300" Power="0.95" Cadence="95"/>
+         <Ramp Duration="30" PowerLow="1.00" PowerHigh="1.50"/>
+         <SteadyState Duration="150" Power="0.50" Cadence="85"/>
+         <SteadyState Duration="300" Power="0.95" Cadence="95"/>
+         <Ramp Duration="30" PowerLow="1.00" PowerHigh="1.50"/>
+         <SteadyState Duration="180" Power="0.50" Cadence="85"/>
+         <IntervalsT Repeat="5" OnDuration="30" OffDuration="30" OnPower="1.30" OffPower="0.70" Cadence="100" CadenceResting="90"/>
+         <SteadyState Duration="180" Power="0.50" Cadence="85"/>
+         <IntervalsT Repeat="5" OnDuration="30" OffDuration="30" OnPower="1.40" OffPower="0.60" Cadence="100" CadenceResting="90"/>
+         <Ramp Duration="420" PowerLow="0.50" PowerHigh="0.25"/>
+    </workout>
+</workout_file>
+
