@@ -40,10 +40,23 @@ class Zwifter {
 public:
 	Zwifter(const char * const name) {
 
+		wname = name;
+
+		// remove surplus
+		while (wname.find("\\") != std::string::npos ||
+				wname.find("/") != std::string::npos) {
+
+			wname = wname.substr(1);
+		}
+		while (wname.find(".") != std::string::npos) {
+
+			wname.pop_back();
+		}
+
 		std::string start = "<workout_file>\n";
 		start += "    <author>Vincent Golle</author>\n";
 		start += "    <name>";
-		start += name;
+		start += wname;
 		start += "</name>\n";
 		start += "    <description></description>\n";
 		start += "    <sportType>bike</sportType>\n";
@@ -159,8 +172,27 @@ public:
 			std::cout << line << std::endl;
 	}
 
+	void save() {
+
+		std::ofstream fCalibrations;
+
+		std::string new_name = "out/";
+		new_name += wname;
+		new_name += ".zwo";
+
+		fCalibrations.open(new_name);
+
+		for (auto line : _series) {
+
+			fCalibrations << line << std::endl;
+		}
+
+		fCalibrations.close();
+	}
+
 private:
 	std::vector<std::string> _series;
+	std::string wname;
 
 	void parseTime(std::string sub, int &sec) {
 

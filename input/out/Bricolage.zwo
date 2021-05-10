@@ -1,0 +1,30 @@
+<workout_file>
+    <author>Vincent Golle</author>
+    <name>Bricolage</name>
+    <description></description>
+    <sportType>bike</sportType>
+    <tags>
+    </tags>
+    <workout>
+         <Ramp Duration="600" PowerLow="0.25" PowerHigh="0.75"/>
+         <IntervalsT Repeat="1" OnDuration="30" OffDuration="30" OnPower="0.95" OffPower="0.50" Cadence="95" CadenceResting="85"/>
+         <IntervalsT Repeat="1" OnDuration="30" OffDuration="30" OnPower="1.05" OffPower="0.50" Cadence="105" CadenceResting="85"/>
+         <IntervalsT Repeat="1" OnDuration="30" OffDuration="30" OnPower="1.15" OffPower="0.50" Cadence="115" CadenceResting="85"/>
+         <SteadyState Duration="120" Power="0.50" Cadence="85"/>
+         <SteadyState Duration="600" Power="1.00" Cadence="90"/>
+         <SteadyState Duration="120" Power="0.50" Cadence="85"/>
+         <SteadyState Duration="180" Power="0.65" Cadence="90"/>
+         <IntervalsT Repeat="4" OnDuration="60" OffDuration="60" OnPower="0.65" OffPower="0.65" Cadence="100" CadenceResting="70"/>
+         <SteadyState Duration="120" Power="0.65" Cadence="90"/>
+         <IntervalsT Repeat="6" OnDuration="180" OffDuration="20" OnPower="0.77" OffPower="1.20" Cadence="90" CadenceResting="110"/>
+         <SteadyState Duration="120" Power="0.50" Cadence="85"/>
+         <SteadyState Duration="180" Power="0.65" Cadence="90"/>
+         <IntervalsT Repeat="4" OnDuration="60" OffDuration="60" OnPower="0.65" OffPower="0.65" Cadence="100" CadenceResting="70"/>
+         <SteadyState Duration="120" Power="0.65" Cadence="90"/>
+         <IntervalsT Repeat="5" OnDuration="60" OffDuration="120" OnPower="1.20" OffPower="0.55" Cadence="100" CadenceResting="85"/>
+         <SteadyState Duration="900" Power="0.65" Cadence="90"/>
+         <SteadyState Duration="600" Power="1.00" Cadence="90"/>
+         <Ramp Duration="300" PowerLow="0.60" PowerHigh="0.25"/>
+    </workout>
+</workout_file>
+

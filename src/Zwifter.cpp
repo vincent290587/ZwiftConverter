@@ -91,26 +91,40 @@ void parseAndConvert(Zwifter &zwifter_, std::vector<std::string> input, std::vec
 
 int main(int argc, char *argv[]) {
 
-	assert(argc == 2);
+	int tmp_argc = 1;
 
-	std::vector<std::string> vecOfStr;
-	std::vector<std::string> output;
+	assert(argc >= 2);
 
-	const char * fname = argv[1];
+	do {
 
-	// Get the contents of file in a vector
-	bool result = getFileContent(fname, vecOfStr);
+		std::vector<std::string> vecOfStr;
+		std::vector<std::string> output;
 
-	if (result) {
-		Zwifter myZwifter(fname);
+		const char * fname = argv[tmp_argc];
 
-		parseAndConvert(myZwifter, vecOfStr, output);
+		// Get the contents of file in a vector
+		bool result = getFileContent(fname, vecOfStr);
 
-		myZwifter.print();
-	} else {
+		if (result) {
 
-		return -1;
-	}
+			Zwifter myZwifter(fname);
+
+			parseAndConvert(myZwifter, vecOfStr, output);
+
+			// print it
+			myZwifter.print();
+
+			// save it
+			myZwifter.save();
+
+		} else {
+
+			return -1;
+		}
+
+		tmp_argc++;
+
+	} while (tmp_argc < argc);
 
 	return 0;
 }

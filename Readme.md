@@ -10,6 +10,7 @@ Currently, only text from https://whatsonzwift.com is supported.
 In order to run the program, you must copy paste the text from a workout in a text file that you will give to the program as argument.
 
 Exemple.txt:  
+
 `10min from 25 to 75% FTP`  
 `1x 30sec @ 95rpm, 95% FTP,`  
 `30sec @ 85rpm, 50% FTP`  
@@ -39,6 +40,10 @@ Exemple.txt:
 
 ## Usage
 
+First create a folder in the current directory called `out`.  
 
-`Zwifter.exe Exemple.txt`
+- `../TDDL/Zwifter.exe Exemple.txt`
+- `../TDDL/Zwifter.exe *.txt`
+
+All converted files will be written in the out/ folder
 
